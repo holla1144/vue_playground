@@ -1,9 +1,4 @@
 .Form {
-  &-label,
-  &-input {
-    display: block;
-  }
-
   &-button {
     border: 0;
     padding: .5em 1.5em;
@@ -12,28 +7,5 @@
 
   &-errorText {
     padding-bottom: 1em;
-  }
-
-  &-input {
-    &--text {
-      border: 0;
-      border-bottom: 1px solid black;
-      outline: none;
-      padding: .5em;
-      width: 100%;
-
-      &.active {
-        border-color: #357edd;
-        transition: background-color 2s;
-      }
-    }
-  }
-
-  &-inputGroup {
-    padding-bottom: 1em;
-  }
-
-  &-label {
-    padding: .25em 0;
   }
 }

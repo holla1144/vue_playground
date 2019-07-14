@@ -8,12 +8,6 @@
 
 <script>
   export default {
-    data() {
-      return {
-
-      }
-    },
-
     methods: {
       handleModalClose() {
         this.$emit("modalCloseRequest");
@@ -33,7 +27,9 @@
     display: flex;
     height: 100%;
     justify-content: center;
-    position: absolute;
+    left: 0;
+    position: fixed;
+    right: 0;
     top: 0;
     width: 100%;
 

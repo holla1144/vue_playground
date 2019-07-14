@@ -15,12 +15,6 @@
   import Logo from "./Logo.vue";
 
   export default {
-    data() {
-        return {
-
-        }
-    },
-
     components: {
       Logo
     }
