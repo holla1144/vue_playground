@@ -6,52 +6,74 @@
     <div class="CardEditorRow-input">
       <TextInput
         label="Term"
-        :handleInput="handleTermUpdate"
         :id="'term' + cardIndex"
         :isValid="term.length > 0"
         :showValidations="showValidations"
-        :value="term"
+        v-model.lazy="term"
       />
     </div>
     <div class="CardEditorRow-input">
       <TextInput
         label="Definition"
-        :handleInput="handleDescriptionUpdate"
         :id="'definition' + cardIndex"
         :isValid="definition.length > 0"
         :showValidations="showValidations"
-        :value="definition"
+        v-model.lazy="definition"
       />
     </div>
   </div>
 </template>
 
 <script>
+  import { mapMutations } from "vuex";
+
   import Card from "../../classes/Card";
   import TextInput from "../shared/TextInput.vue";
 
   export default {
     computed: {
-      definition: function () {
-        return this.card.definition || "";
-      },
-
       showRemoveButton: function() {
         return this.card.validate();
-      },
+      }
+    },
 
-      term: function () {
-        return this.card.term || "";
+    data() {
+      return {
+        definition: this.card.definition,
+        term: this.card.term
       }
     },
 
     methods: {
-      handleTermUpdate($event) {
-        this.handleCardUpdate(this.cardIndex, "term", $event.target.value);
+      ...mapMutations("collectionEditor", [
+        "removeCard",
+        "updateCard"
+      ]),
+
+      handleCardRemove() {
+        this.removeCard(this.cardIndex);
+      },
+    },
+
+    watch: {
+      term: function() {
+        const mutationPayload = {
+          cardIndex: this.cardIndex,
+          field: "term",
+          value: this.term
+        };
+
+        this.updateCard(mutationPayload);
       },
 
-      handleDescriptionUpdate($event) {
-        this.handleCardUpdate(this.cardIndex, "definition", $event.target.value);
+      definition: function() {
+        const mutationPayload = {
+          cardIndex: this.cardIndex,
+          field: "definition",
+          value: this.definition
+        };
+
+        this.updateCard(mutationPayload);
       }
     },
 
@@ -65,16 +87,6 @@
 
       "cardIndex": {
         type: Number,
-        required: true
-      },
-
-      "handleCardRemove": {
-        type: Function,
-        required: true
-      },
-
-      "handleCardUpdate": {
-        type: Function,
         required: true
       },
 

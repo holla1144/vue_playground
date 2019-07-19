@@ -4,26 +4,22 @@
       id="collectionName"
       label="Collection Name"
       placeholder="Ex. JS Terms"
-      :handleInput="handleInput"
+      @input="updateField"
       :isValid="collectionName.length > 0"
       :showValidations="showValidations"
-      :value="collectionName"
+      v-model="collectionName"
     />
     <TextInput
       id="collectionDescription"
       label="Description"
       placeholder="Describe your collection"
-      :handleInput="handleInput"
       :isValid="collectionDescription.length > 0"
       :showValidations="showValidations"
-      :value="collectionDescription"
+      v-model="collectionDescription"
     />
     <h2>Add Some Cards</h2>
     <CardEditor
-      :cards="collectionCards"
-      :handleCardAdd="handleCardAdd"
-      :handleCardRemove="handleCardRemove"
-      :handleCardUpdate="handleCardUpdate"
+      :cards="cards"
       :showValidations="showValidations"
     />
     <button @click="handleSave">Save Collection</button>
@@ -31,7 +27,8 @@
 </template>
 
 <script>
-  import Card from "../../classes/Card";
+  import { mapMutations, mapState } from "vuex";
+
   import Collection from "../../classes/Collection";
   import CardEditor from "./CardEditor.vue";
   import TextInput from "../shared/TextInput.vue";
@@ -39,38 +36,32 @@
   export default {
     data() {
       return {
-        collectionCards: this.collection.cards,
-        collectionDescription: this.collection.description,
-        collectionName: this.collection.name,
         showValidations: false
       }
     },
 
     methods: {
-      handleCardAdd() {
-        this.collectionCards.push(new Card());
+      updateField($event) {
+        console.log($event);
+        const name = $event.target.name;
+        const value = $event.target.value;
+        console.log(target);
+
+        name === "collectionDescription" ? this.updateDescription(value) : this.updateName(value);
       },
 
-      handleCardRemove(index) {
-        this.collectionCards.splice(index, 1);
-      },
-
-      handleCardUpdate(index, field, value) {
-        this.showValidations = false;
-        this.collectionCards[index][field] = value;
-      },
-
-      handleInput($event) {
-        this.showValidations = false;
-        this[$event.target.id] = $event.target.value;
-      },
+      ...mapMutations("collectionEditor", [
+        "updateDescription",
+        "updateName"
+      ]),
 
       handleSave() {
-        const candidateCollection = new Collection(this.collectionName, this.collectionDescription, this.collectionCards);
+        const candidateCollection = new Collection(this.collectionName, this.collectionDescription, this.cards);
         const isCollectionValid = candidateCollection.validate();
 
         if (isCollectionValid) {
-          this.$emit("addCollection", candidateCollection);
+          this.$store.commit("addCollection", candidateCollection);
+          this.$emit("collectionAdded");
           return;
         }
 

@@ -7,7 +7,7 @@
         <Collections :collections="collections" :handle-click="handleAddCollectionClick"></Collections>
       </div>
       <div v-if="component === 'editCollection'">
-        <CollectionEditor :collection="selectedCollection" @addCollection="handleAddCollection"></CollectionEditor>
+        <CollectionEditor :collection="selectedCollection" @collectionAdded="handleAddCollection"></CollectionEditor>
       </div>
     </main>
   </div>
@@ -18,27 +18,34 @@
   import Collection from "./classes/Collection";
   import CollectionEditor from "./components/collectionEditor/CollectionEditor.vue";
   import Collections from "./components/Collections.vue";
-  import createCollections from "./dummyData";
   import Header from "./components/header/Header.vue";
 
-  const collections = createCollections();
   export default {
+    computed: {
+      collections() {
+        return this.$store.state.collections;
+      },
+
+      selectedCollection() {
+        return this.$store.state.collectionEditor.collection;
+      }
+    },
+
     data() {
       return {
-        collections,
-        component: "collections",
-        selectedCollection: []
+        component: "collections"
       }
     },
 
     methods: {
       handleAddCollectionClick() {
-        this.component = "editCollection";
-        this.selectedCollection = new Collection("", "", [new Card("Lemon", "A Yellow Fruit"), new Card()]);
+        const newCollection = new Collection("", "", [new Card("Lemon", "A Yellow Fruit"), new Card()]);
+        this.$store.commit("collectionEditor/setCollection", newCollection);
+        this.component = 'editCollection';
       },
 
-      handleAddCollection(collection) {
-        this.collections.push(collection);
+      handleAddCollection() {
+        this.component = "collections";
       }
     },
 

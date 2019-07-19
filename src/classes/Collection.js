@@ -1,8 +1,8 @@
 class Collection {
-  constructor(name, description, cards) {
+  constructor(name = "", description = "", cards = []) {
     this.name = name;
     this.description = description;
-    this.cards = cards || [];
+    this.cards = cards;
   }
 
   addCard(card) {

@@ -36,14 +36,14 @@
 
       handleFocus() {
         this.isFocused = true;
+      },
+
+      handleInput($event) {
+        this.$emit("input", $event.target.value )
       }
     },
 
     props: {
-      handleInput: {
-        type: Function,
-        required: true
-      },
       id: {
         type: String,
         required: true

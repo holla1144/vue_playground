@@ -4,10 +4,8 @@
       v-for="(card, index) in cards"
       :card="card"
       :cardIndex="index"
-      :handleCardRemove="handleCardRemove"
-      :handleCardUpdate="handleCardUpdate"
       :showValidations="showValidations"
-      :key=""
+      :key="card.id"
     />
     <div class="EditorActions">
       <button @click="handleCardAdd">Add a card</button>
@@ -19,22 +17,15 @@
   import CardEditorRow from "./CardEditorRow.vue";
 
   export default {
+    methods: {
+      handleCardAdd() {
+        this.$store.commit("collectionEditor/addCard");
+      }
+    },
+
     props: {
       "cards": {
         type: Array,
-        required: true
-      },
-      "handleCardAdd": {
-        type: Function,
-        required: true
-      },
-      "handleCardRemove": {
-        type: Function,
-        required: true
-      },
-
-      "handleCardUpdate": {
-        type: Function,
         required: true
       },
 
@@ -43,6 +34,7 @@
         required: true
       }
     },
+
     components: {
       CardEditorRow
     }
