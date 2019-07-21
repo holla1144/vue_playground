@@ -1,0 +1,33 @@
+{
+  "name": "quizlet-clone-server",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -d dist",
+    "dev": "nodemon --watch src --exec yarn start",
+    "start": "yarn build && yarn serve",
+    "serve": "node dist/index.js",
+    "test": "jest --runInBand",
+    "test:watch": "yarn test --watch"
+  },
+  "dependencies": {
+    "babel-jest": "^24.8.0",
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "body-parser": "^1.19.0",
+    "express-jwt": "^5.3.1",
+    "jest": "^24.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
+  }
+}
