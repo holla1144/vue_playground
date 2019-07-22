@@ -30,7 +30,7 @@
                   type="password"
                 />
 
-                <button @click.prevent="submitForm">Submit</button>
+                <button v-if="fieldsValid" @click.prevent="submitForm">Submit</button>
 
                 <div class="loginForm-footer">
                   <p v-if="formType === 'login'">
@@ -173,9 +173,12 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../../styles/Variables";
+
   header {
     align-content: center;
     display: flex;
+    padding: 0 1em;
 
     nav {
       margin-left: auto;
@@ -199,18 +202,19 @@
     height: 100%;
 
     h2 {
-      font-size: 1.3em;
+      font-weight: bold;
       padding-bottom: 1.5em;
       text-transform: uppercase;
     }
 
     button {
-      background-color: #357edd;
+      background-color: $green;
       border: 0;
       color: white;
       cursor: pointer;
+      font-size: 1.25em;
       margin-bottom: 1em;
-      padding: 0.5em 1em;
+      padding: 0.75em 1.2em;
       text-transform: uppercase;
     }
 
@@ -221,11 +225,11 @@
 
     &-footer {
       span {
-        color: #357edd;
+        color: $blue;
         cursor: pointer;
 
         &:hover {
-          border-bottom: 1px solid #357edd;
+          border-bottom: 1px solid $blue;
         }
       }
     }

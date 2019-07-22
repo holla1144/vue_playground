@@ -1,9 +1,7 @@
 <template>
   <div class="CardSet pointer">
     <div class="CardSet-body br4">
-      <div class="CardSet-decoration">
-        <div class="CardSet-colorBlock br4" :style="{backgroundColor}"></div>
-      </div>
+      <div class="CardSet-decoration br4" :style="{backgroundColor}"></div>
       <div class="CardSet-information">
         <p>{{ cardSet.name }}</p>
         <span>{{ cardSet.cards.length }} cards</span>
@@ -33,16 +31,12 @@
 
    &:hover {
      .CardSet-body {
-       box-shadow: 7px 7px 8px grey;
-     }
-
-     .CardSet-colorBlock {
-       left: -43px;
+       box-shadow: 4px 6px 12px 4px grey;
      }
    }
 
    &-body {
-     box-shadow: 4px 5px 12px grey;
+     box-shadow: 8px 10px 12px 2px grey;
      display: flex;
      padding: 1.5em 1em;
      position: relative;
@@ -50,23 +44,14 @@
    }
 
    &-decoration {
-     flex-basis: calc(100% / 3);
-     min-width: 120px;
-     position: relative;
-   }
-
-   &-colorBlock {
-     background-color: red;
-     height: 150px;
+     height: 160px;
      left: -40px;
-     position: absolute;
-     transition: left 500ms;
-     width: 150px;
+     position: relative;
+     width: 160px;
    }
 
    &-information {
     height: 150px;
-    padding-left: 1em;
    }
  }
 </style>
