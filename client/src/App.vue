@@ -13,7 +13,7 @@
 
   export default {
     mounted() {
-      this.$store.dispatch(`auth/${REGISTER}`, {username: "max", password: "lemon"})
+      // this.$store.dispatch(`auth/${REGISTER}`, {username: "max", password: "lemon"})
     },
 
     components: {

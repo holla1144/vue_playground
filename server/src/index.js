@@ -10,7 +10,12 @@ const PORT = 3000;
 const DB_URI = process.env.DB_URI;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(DB_URI, { useCreateIndex: true, useNewUrlParser: true }, () => {
+mongoose.connect(DB_URI, { useCreateIndex: true, useNewUrlParser: true }, (err) => {
+  if (err) {
+    console.error("Couldn't connect to DB:", err);
+    proccess.exit(1);
+  }
+
   APP.use(cors());
   APP.use(ROUTER);
   APP.use(express.static('../client/dist'));
@@ -18,6 +23,5 @@ mongoose.connect(DB_URI, { useCreateIndex: true, useNewUrlParser: true }, () => 
   APP.listen(PORT, () => console.info(`App listening at port: ${PORT}`));
 });
 
-const DB = mongoose.connection;
+mongoose.set('debug', true);
 
-DB.on("error", console.error.bind(console, 'connection error:'));

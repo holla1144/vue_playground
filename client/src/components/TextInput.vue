@@ -3,13 +3,13 @@
     <label :class="{active: isFocused, error: isInvalid}" :for="id">{{ label }}</label>
     <input
       class="Form-input Form-input--text"
-      type="text"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
       :class="{active: isFocused, error: isInvalid}"
       :id="id"
       :placeholder="placeholder"
+      :type="type"
       :value="value"
     />
   </fieldset>
@@ -63,6 +63,10 @@
       showValidations: {
         type: Boolean,
         default: false
+      },
+      type: {
+        type: String,
+        default: "text"
       },
       value: {
         type: String,

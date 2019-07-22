@@ -28,7 +28,7 @@
   import { mapMutations } from "vuex";
 
   import Card from "../../classes/Card";
-  import TextInput from "../shared/TextInput.vue";
+  import TextInput from "../TextInput.vue";
 
   export default {
     computed: {
