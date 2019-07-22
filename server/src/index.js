@@ -13,7 +13,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(DB_URI, { useCreateIndex: true, useNewUrlParser: true }, (err) => {
   if (err) {
     console.error("Couldn't connect to DB:", err);
-    procces.exit(1);
+    proccess.exit(1);
   }
 
   APP.use(cors());
@@ -22,3 +22,6 @@ mongoose.connect(DB_URI, { useCreateIndex: true, useNewUrlParser: true }, (err) 
 
   APP.listen(PORT, () => console.info(`App listening at port: ${PORT}`));
 });
+
+mongoose.set('debug', true);
+

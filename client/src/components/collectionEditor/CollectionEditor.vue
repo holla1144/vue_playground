@@ -31,7 +31,7 @@
 
   import Collection from "../../classes/Collection";
   import CardEditor from "./CardEditor.vue";
-  import TextInput from "../shared/TextInput.vue";
+  import TextInput from "../TextInput.vue";
 
   export default {
     data() {

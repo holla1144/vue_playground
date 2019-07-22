@@ -5,10 +5,8 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    index: {
-      unique: true,
-      dropDups: true
-    },
+    unique: true,
+    dropDups: true
   },
   password: {
     type: String,
@@ -43,4 +41,4 @@ userSchema.methods.comparePasswords = function(candidatePassword) {
   });
 };
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

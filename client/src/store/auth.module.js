@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { CHECK_AUTH, LOGIN, LOGOUT, REGISTER } from "./actions.type";
+import { CLEAR_ERROR, CHECK_AUTH, LOGIN, LOGOUT, REGISTER } from "./actions.type";
 import { REMOVE_AUTH, SET_AUTH, SET_ERROR } from "./mutations.type";
 import apiService from "../services/api.service";
 import { deleteToken, getToken, setToken } from "../services/jwt.service";
@@ -20,6 +20,10 @@ const getters = {
 };
 
 const actions = {
+  [CLEAR_ERROR](state) {
+    state.commit(SET_ERROR, "");
+  },
+
   async [CHECK_AUTH](state) {
     const token = getToken();
 
@@ -44,14 +48,16 @@ const actions = {
   },
 
   async [LOGIN](state, { username, password }) {
-    let userData;
+    let response;
 
     try {
-      userData = await apiService.login( { username, password } )
+      response = await apiService.login( { username, password } )
     } catch(e) {
-      state.commit(SET_ERROR, e);
+      state.commit(SET_ERROR, e.response.data.message);
+      return false;
     }
 
+    const { token, user } = response.data;
     state.commit(SET_AUTH, { token, user });
   },
 
@@ -65,8 +71,8 @@ const actions = {
     try {
       response = await apiService.registerUser({ username, password })
     } catch(e) {
-      state.commit(SET_ERROR, e);
-      return;
+      state.commit(SET_ERROR, e.response.data.message);
+      return false;
     }
 
     const { token, user } = response.data;

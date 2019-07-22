@@ -13,7 +13,6 @@ const collectionEditor = {
     },
 
     removeCard(state, index) {
-      console.log("removing card", index);
       state.collection.cards.splice(index, 1);
     },
 
