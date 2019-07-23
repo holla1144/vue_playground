@@ -77,8 +77,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../styles/Variables";
-
   fieldset {
     border: 0;
     padding: 0 0 1em 0;

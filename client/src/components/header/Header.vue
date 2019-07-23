@@ -11,7 +11,7 @@
           <li @click="loginModalOpen = true">Log In/Register</li>
           <Modal @modalCloseRequest="closeLoginModal" :isOpen="loginModalOpen">
             <form class="loginForm">
-              <h2>{{ modalTitle }}</h2>
+              <h3>{{ modalTitle }}</h3>
               <div>
                 <p class="loginForm-error" v-if="error">Whoops, {{ error }}</p>
                 <TextInput
@@ -133,7 +133,7 @@
 
       logOut() {
         this.$store.dispatch(`auth/${LOGOUT}`);
-        router.push("/");
+        router.push({ name: "home" });
       },
 
       async submitForm() {
@@ -147,7 +147,7 @@
 
         if (!this.error) {
           this.closeLoginModal();
-          router.push("/");
+          router.push({ name: "home" });
         }
       },
 
@@ -173,8 +173,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../styles/Variables";
-
   header {
     align-content: center;
     display: flex;
@@ -201,7 +199,7 @@
   .loginForm {
     height: 100%;
 
-    h2 {
+    h3 {
       font-weight: bold;
       padding-bottom: 1.5em;
       text-transform: uppercase;

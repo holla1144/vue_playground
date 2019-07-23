@@ -17,8 +17,8 @@
   };
 </script>
 
-<style lang="scss">
-  @import "./styles/Variables";
-  @import "./styles/Base";
-  @import "./styles/Text";
+<style lang="scss" scoped>
+  main {
+    padding: 1em;
+  }
 </style>
