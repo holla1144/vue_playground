@@ -20,14 +20,14 @@ const ApiService = {
   },
 
   login({ username, password }) {
-    return Vue.axios.post("login", {
+    return Vue.axios.post("/login", {
       username,
       password
     })
   },
 
   registerUser({ username, password }) {
-    return Vue.axios.post("user/new", {
+    return Vue.axios.post("/user/new", {
       username,
       password
     })

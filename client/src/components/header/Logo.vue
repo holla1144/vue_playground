@@ -5,6 +5,6 @@
 </script>
 <style lang="scss" scoped>
   h2 {
-    padding: .3em;
+    padding: .3em 0;
   }
 </style>

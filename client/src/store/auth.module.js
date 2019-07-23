@@ -35,13 +35,13 @@ const actions = {
       try {
         response = await apiService.getUser(userId);
       } catch(e) {
-        state.commit(SET_ERROR, e);
-        return;
+        state.commit(REMOVE_AUTH);
+        state.commit(SET_ERROR, e.response.data.message);
+        return
       }
 
       const user = response.data;
       state.commit(SET_AUTH, { token, user });
-      return;
     }
 
     state.commit(REMOVE_AUTH);
@@ -53,8 +53,9 @@ const actions = {
     try {
       response = await apiService.login( { username, password } )
     } catch(e) {
+      state.commit(REMOVE_AUTH);
       state.commit(SET_ERROR, e.response.data.message);
-      return false;
+      return
     }
 
     const { token, user } = response.data;
@@ -71,8 +72,9 @@ const actions = {
     try {
       response = await apiService.registerUser({ username, password })
     } catch(e) {
+      state.commit(REMOVE_AUTH);
       state.commit(SET_ERROR, e.response.data.message);
-      return false;
+      return
     }
 
     const { token, user } = response.data;
@@ -82,7 +84,6 @@ const actions = {
 
 const mutations = {
   [REMOVE_AUTH](state) {
-    state.errors = null;
     state.isAuthenticated = false;
     state.user = {
       id: "",
@@ -90,13 +91,8 @@ const mutations = {
     };
     deleteToken();
   },
-  [SET_ERROR](state, errors) {
-    state.isAuthenticated = false;
-    state.errors = errors;
-    state.user = {
-      id: "",
-      username: ""
-    };
+  [SET_ERROR](state, errorMessage) {
+    state.errors = errorMessage;
   },
   [SET_AUTH](state, { token, user }) {
     state.errors = null;

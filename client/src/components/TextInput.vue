@@ -84,17 +84,16 @@
 
   label {
     display: block;
-    font-weight: bold;
     padding: .25em 0;
     text-transform: uppercase;
 
     &.active {
-      color: #357edd;
+      color: $blue;
       transition: color 2s;
     }
 
     &.error {
-     color: red;
+     color: $red;
     }
   }
 
@@ -108,12 +107,12 @@
     width: 100%;
 
     &.active {
-      border-color: #357edd;
+      border-color: $blue;
       transition: background-color 2s;
     }
 
     &.error {
-      border-color: red;
+      border-color: $red;
     }
   }
 </style>

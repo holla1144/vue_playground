@@ -11,7 +11,7 @@
           <li @click="loginModalOpen = true">Log In/Register</li>
           <Modal @modalCloseRequest="closeLoginModal" :isOpen="loginModalOpen">
             <form class="loginForm">
-              <h2>{{ modalTitle }}</h2>
+              <h3>{{ modalTitle }}</h3>
               <div>
                 <p class="loginForm-error" v-if="error">Whoops, {{ error }}</p>
                 <TextInput
@@ -30,7 +30,7 @@
                   type="password"
                 />
 
-                <button @click.prevent="submitForm">Submit</button>
+                <button v-if="fieldsValid" @click.prevent="submitForm">Submit</button>
 
                 <div class="loginForm-footer">
                   <p v-if="formType === 'login'">
@@ -133,7 +133,7 @@
 
       logOut() {
         this.$store.dispatch(`auth/${LOGOUT}`);
-        router.push("/");
+        router.push({ name: "home" });
       },
 
       async submitForm() {
@@ -147,7 +147,7 @@
 
         if (!this.error) {
           this.closeLoginModal();
-          router.push("/");
+          router.push({ name: "home" });
         }
       },
 
@@ -176,6 +176,7 @@
   header {
     align-content: center;
     display: flex;
+    padding: 0 1em;
 
     nav {
       margin-left: auto;
@@ -198,19 +199,20 @@
   .loginForm {
     height: 100%;
 
-    h2 {
-      font-size: 1.3em;
+    h3 {
+      font-weight: bold;
       padding-bottom: 1.5em;
       text-transform: uppercase;
     }
 
     button {
-      background-color: #357edd;
+      background-color: $green;
       border: 0;
       color: white;
       cursor: pointer;
+      font-size: 1.25em;
       margin-bottom: 1em;
-      padding: 0.5em 1em;
+      padding: 0.75em 1.2em;
       text-transform: uppercase;
     }
 
@@ -221,11 +223,11 @@
 
     &-footer {
       span {
-        color: #357edd;
+        color: $blue;
         cursor: pointer;
 
         &:hover {
-          border-bottom: 1px solid #357edd;
+          border-bottom: 1px solid $blue;
         }
       }
     }
