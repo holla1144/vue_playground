@@ -12,7 +12,6 @@ export default async(req, res) => {
     const query = User.findById(updateId);
     retrievedUser = await query.exec();
   } catch(e) {
-    console.error(e);
     res.status(500).send( {message: "Sorry, something went wrong"} );
   }
 
@@ -33,7 +32,6 @@ export default async(req, res) => {
 
     updatedUser = await retrievedUser.save();
   } catch(e) {
-    console.error(e);
     res.status(500).send( {message: "Sorry, something went wrong"} );
   }
 

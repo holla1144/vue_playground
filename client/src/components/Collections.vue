@@ -11,10 +11,27 @@
   </div>
 </template>
 <script>
+  import Card from "../classes/Card";
   import CardSet from "./CardSet.vue";
+  import Collection from "../classes/Collection";
 
   export default {
-    props: ["collections", "handleClick"],
+    computed: {
+      collections() {
+        return this.$store.state.collections;
+      }
+    },
+
+    methods: {
+      handleClick() {
+        const collection = new Collection("New collection", "", [new Card(), new Card()]);
+        this.$store.dispatch("collectionEditor/setCollection", collection);
+
+        this.$router.push({ name: "editor", params: { routeName: "new" }});
+      }
+    },
+
+    props: ["collections"],
     components: { CardSet }
   }
 </script>

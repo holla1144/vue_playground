@@ -27,13 +27,31 @@
 </template>
 
 <script>
-  import { mapMutations, mapState } from "vuex";
+  import { mapMutations } from "vuex";
 
   import Collection from "../../classes/Collection";
   import CardEditor from "./CardEditor.vue";
   import TextInput from "../TextInput.vue";
 
   export default {
+    computed: {
+      cards() {
+        return this.$store.state.collectionEditor.collection.cards;
+      },
+
+      collection() {
+        return this.$store.state.collectionEditor.collection;
+      },
+
+      collectionDescription() {
+        return this.$store.state.collectionEditor.collection.description;
+      },
+
+      collectionName() {
+        return this.$store.state.collectionEditor.collection.name;
+      }
+    },
+
     data() {
       return {
         showValidations: false
@@ -42,10 +60,8 @@
 
     methods: {
       updateField($event) {
-        console.log($event);
         const name = $event.target.name;
         const value = $event.target.value;
-        console.log(target);
 
         name === "collectionDescription" ? this.updateDescription(value) : this.updateName(value);
       },
@@ -69,13 +85,6 @@
 
         alert("Sorry, your new collection is invalid");
       }
-    },
-
-    props: {
-      collection: {
-        required: true,
-        validator: collection => collection instanceof Collection
-      },
     },
 
     components: {

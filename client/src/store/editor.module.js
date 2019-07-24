@@ -7,6 +7,12 @@ const collectionEditor = {
     collection: new Collection()
   },
 
+  actions: {
+    setCollection(state, collection) {
+      state.commit("setCollection", collection);
+    }
+  },
+
   mutations: {
     addCard(state) {
       state.collection.addCard(new Card());

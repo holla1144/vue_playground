@@ -52,7 +52,6 @@
 <script>
   import Logo from "./Logo.vue";
   import Modal from "../Modal.vue";
-  import router from "../../router";
   import TextInput from "../TextInput.vue";
   import {
     CLEAR_ERROR,
@@ -116,11 +115,13 @@
     watch: {
       username() {
         this.formError = "";
+        this.$store.dispatch(`auth/${CLEAR_ERROR}`);
         this.showValidations = false;
       },
 
       password() {
         this.formError = "";
+        this.$store.dispatch(`auth/${CLEAR_ERROR}`);
         this.showValidations = false;
       }
     },
@@ -133,7 +134,7 @@
 
       logOut() {
         this.$store.dispatch(`auth/${LOGOUT}`);
-        router.push({ name: "home" });
+        this.$router.push({ name: "home" });
       },
 
       async submitForm() {
@@ -147,7 +148,7 @@
 
         if (!this.error) {
           this.closeLoginModal();
-          router.push({ name: "home" });
+          this.$router.push({ name: "home" });
         }
       },
 

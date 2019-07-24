@@ -1,19 +1,13 @@
 <template>
   <div>
-    <!-- I know, I know. This will get replaced with actual routes -->
-    <div v-if="component === 'collections'">
-      <Collections :collections="collections" :handle-click="handleAddCollectionClick"></Collections>
-    </div>
-    <div v-if="component === 'editCollection'">
-      <CollectionEditor :collection="selectedCollection" @collectionAdded="handleAddCollection"></CollectionEditor>
+    <Collections v-if="isLoggedIn" :collections="collections" />
+    <div v-else>
+      <h1>THIS IS A LANDING PAGE FOR PEOPLE WHO HAVEN'T REGISTERED</h1>
     </div>
   </div>
 </template>
 
 <script>
-  import Card from "../classes/Card";
-  import Collection from "../classes/Collection";
-  import CollectionEditor from "../components/collectionEditor/CollectionEditor.vue";
   import Collections from "../components/Collections.vue";
 
   export default {
@@ -22,32 +16,13 @@
         return this.$store.state.collections;
       },
 
-      selectedCollection() {
-        return this.$store.state.collectionEditor.collection;
-      }
-    },
-
-    data() {
-      return {
-        component: "collections"
-      }
-    },
-
-    methods: {
-      handleAddCollectionClick() {
-        const newCollection = new Collection("", "", [new Card("Lemon", "A Yellow Fruit"), new Card()]);
-        this.$store.commit("collectionEditor/setCollection", newCollection);
-        this.component = 'editCollection';
-      },
-
-      handleAddCollection() {
-        this.component = "collections";
+      isLoggedIn() {
+        return this.$store.state.auth.isAuthenticated;
       }
     },
 
     components: {
-      Collections,
-      CollectionEditor
+      Collections
     }
   };
 </script>

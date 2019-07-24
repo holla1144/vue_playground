@@ -30,35 +30,34 @@ const actions = {
     if (token) {
       apiService.setHeaders(token);
       const userId = jwt_decode(token).userId;
-      let response;
 
-      try {
-        response = await apiService.getUser(userId);
-      } catch(e) {
+      const attemptRetrieveUser = await apiService.getUser(userId);
+      const { error, data } = attemptRetrieveUser;
+
+      if (error) {
         state.commit(REMOVE_AUTH);
-        state.commit(SET_ERROR, e.response.data.message);
+        state.commit(SET_ERROR, error.message);
         return
       }
 
-      const user = response.data;
-      state.commit(SET_AUTH, { token, user });
+      state.commit(SET_AUTH, { token, user: data });
+      return
     }
 
     state.commit(REMOVE_AUTH);
   },
 
   async [LOGIN](state, { username, password }) {
-    let response;
+    const loginAttempt = await apiService.login( { username, password } );
+    const { error, data } = loginAttempt;
 
-    try {
-      response = await apiService.login( { username, password } )
-    } catch(e) {
+    if (error) {
       state.commit(REMOVE_AUTH);
-      state.commit(SET_ERROR, e.response.data.message);
+      state.commit(SET_ERROR, error.message);
       return
     }
 
-    const { token, user } = response.data;
+    const { token, user } = data;
     state.commit(SET_AUTH, { token, user });
   },
 
@@ -67,17 +66,16 @@ const actions = {
   },
 
   async [REGISTER](state, {username, password}) {
-    let response;
+    const registrationAttempt = await apiService.registerUser({ username, password });
+    const { error, data } = registrationAttempt;
 
-    try {
-      response = await apiService.registerUser({ username, password })
-    } catch(e) {
+    if (error) {
       state.commit(REMOVE_AUTH);
-      state.commit(SET_ERROR, e.response.data.message);
+      state.commit(SET_ERROR, error.message);
       return
     }
 
-    const { token, user } = response.data;
+    const { token, user } = data;
     state.commit(SET_AUTH, { token, user });
   }
 };
