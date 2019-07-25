@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import auth from "./auth.module";
+import auth from "./Auth/auth.module";
 import collectionEditor from "./editor.module";
 import createCollections from "../dummyData";
 

@@ -12,7 +12,7 @@
 
 <script>
   import { CHECK_AUTH } from "./store/actions.type";
-  import Header from "./components/header/Header.vue";
+  import Header from "./components/Header/Header.vue";
 
   export default {
     mounted() {

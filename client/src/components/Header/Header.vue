@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import Logo from "./Logo.vue";
+  import Logo from "../Logo/Logo.vue";
   import Modal from "../Modal.vue";
   import TextInput from "../TextInput.vue";
   import {

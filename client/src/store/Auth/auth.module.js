@@ -1,25 +1,26 @@
 import jwt_decode from "jwt-decode";
-import { CLEAR_ERROR, CHECK_AUTH, LOGIN, LOGOUT, REGISTER } from "./actions.type";
-import { REMOVE_AUTH, SET_AUTH, SET_ERROR } from "./mutations.type";
-import apiService from "../services/api.service";
-import { deleteToken, getToken, setToken } from "../services/jwt.service";
+import { CLEAR_ERROR, CHECK_AUTH, LOGIN, LOGOUT, REGISTER } from "../actions.type";
+import { REMOVE_AUTH, SET_AUTH, SET_ERROR } from "../mutations.type";
+import apiService from "../../services/api.service";
+import { deleteToken, getToken, setToken } from "../../services/jwt.service";
 
 const namespaced = true;
-
-const state = {
+export const initialState = () => ({
   errors: null,
   isAuthenticated: !!getToken(),
   user: {
     id: "",
     username: ""
   }
-};
+});
+
+const state = initialState();
 
 const getters = {
 
 };
 
-const actions = {
+export const actions = {
   [CLEAR_ERROR](state) {
     state.commit(SET_ERROR, "");
   },
@@ -80,7 +81,7 @@ const actions = {
   }
 };
 
-const mutations = {
+export const mutations = {
   [REMOVE_AUTH](state) {
     state.isAuthenticated = false;
     state.user = {
