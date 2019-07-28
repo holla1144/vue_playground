@@ -14,12 +14,13 @@
 </template>
 
 <script>
+  import { ADD_CARD } from "../../store/mutations.type";
   import CardEditorRow from "./CardEditorRow.vue";
 
   export default {
     methods: {
       handleCardAdd() {
-        this.$store.commit("collectionEditor/addCard");
+        this.$store.commit(`editor/${ADD_CARD}`);
       }
     },
 

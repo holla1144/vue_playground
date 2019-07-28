@@ -2,23 +2,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import auth from "./Auth/auth.module";
-import collectionEditor from "./editor.module";
-import createCollections from "../dummyData";
+import editor from "./Editor/editor.module";
+import collection from "./Collection/collection.module";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: {
-    collections: createCollections()
-  },
-  mutations: {
-    addCollection(state, collection) {
-      state.collections.push(collection)
-    }
-  },
   modules: {
     auth,
-    collectionEditor
+    collection,
+    editor
   }
 });
 

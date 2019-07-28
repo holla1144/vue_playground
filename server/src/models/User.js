@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cardSets: Array
+  cardSets: {
+    type: Array,
+    default: []
+  }
 });
 
 userSchema.pre("save", function(next) {

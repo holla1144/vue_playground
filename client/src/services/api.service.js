@@ -25,10 +25,10 @@ const ApiService = {
   getUser(userId) {
     return Vue.axios.get(`/user/${userId}`)
       .then(response => {
-        return new FormattedResponse({data: response.data})
+        return new FormattedResponse({ data: response.data })
       })
       .catch(error => {
-        return new FormattedResponse({error: error.response.data});
+        return new FormattedResponse({ error: error.response.data });
       })
   },
 
@@ -38,10 +38,10 @@ const ApiService = {
       password
     })
     .then(response => {
-      return new FormattedResponse({data: response.data});
+      return new FormattedResponse({ data: response.data });
     })
     .catch(error => {
-      return new FormattedResponse({error: error.response.data});
+      return new FormattedResponse({ error: error.response.data });
       }
     )
   },
@@ -52,10 +52,20 @@ const ApiService = {
       password
     })
     .then(response => {
-      return new FormattedResponse({data: response.data});
+      return new FormattedResponse({ data: response.data });
     })
     .catch(error => {
-      return new FormattedResponse({error: error.response.data});
+      return new FormattedResponse({ error: error.response.data });
+    })
+  },
+
+  updateUser(userId, payload) {
+    return Vue.axios.put(`/user/${userId}/update`, payload)
+    .then(response => {
+      return new FormattedResponse({ data: response.data });
+    })
+    .catch(error => {
+      return new FormattedResponse({ error: error.response.data })
     })
   }
 };

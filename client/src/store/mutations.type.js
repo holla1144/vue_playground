@@ -1,3 +1,10 @@
+export const ADD_CARD = "addCard";
+export const ADD_COLLECTION = "addCollection";
 export const REMOVE_AUTH = "purgeAuth";
+export const REMOVE_CARD = "removeCard";
 export const SET_AUTH = "setUser";
+export const SET_COLLECTION = "setEditCollection";
+export const SET_COLLECTIONS = "setCollections";
 export const SET_ERROR = "setError";
+export const UPDATE_CARD = "updateCard";
+export const UPDATE_COLLECTION = "updateCollections";

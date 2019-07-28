@@ -25,8 +25,7 @@
 </template>
 
 <script>
-  import { mapMutations } from "vuex";
-
+  import { REMOVE_CARD, UPDATE_CARD } from "../../store/mutations.type";
   import Card from "../../classes/Card";
   import TextInput from "../TextInput.vue";
 
@@ -45,13 +44,8 @@
     },
 
     methods: {
-      ...mapMutations("collectionEditor", [
-        "removeCard",
-        "updateCard"
-      ]),
-
       handleCardRemove() {
-        this.removeCard(this.cardIndex);
+        this.$store.commit(`editor/${REMOVE_CARD}`, this.cardIndex);
       },
     },
 
@@ -63,7 +57,7 @@
           value: this.term
         };
 
-        this.updateCard(mutationPayload);
+        this.$store.commit(`editor/${UPDATE_CARD}`, mutationPayload);
       },
 
       definition: function() {
@@ -73,7 +67,7 @@
           value: this.definition
         };
 
-        this.updateCard(mutationPayload);
+        this.$store.commit(`editor/${UPDATE_CARD}`, mutationPayload);
       }
     },
 

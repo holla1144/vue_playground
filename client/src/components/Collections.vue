@@ -11,27 +11,29 @@
   </div>
 </template>
 <script>
-  import Card from "../classes/Card";
   import CardSet from "./CardSet.vue";
-  import Collection from "../classes/Collection";
+  import { FETCH_COLLECTIONS } from "../store/actions.type";
 
   export default {
+
     computed: {
       collections() {
-        return this.$store.state.collections;
+        return this.$store.state.collection.collections;
+      }
+    },
+
+    data() {
+      return {
+        isLoading: true
       }
     },
 
     methods: {
       handleClick() {
-        const collection = new Collection("New collection", "", [new Card(), new Card()]);
-        this.$store.dispatch("collectionEditor/setCollection", collection);
-
-        this.$router.push({ name: "editor", params: { routeName: "new" }});
+        this.$router.push({ name: "editor", params: { routeName: "new", collectionId: "-1" }});
       }
     },
 
-    props: ["collections"],
     components: { CardSet }
   }
 </script>

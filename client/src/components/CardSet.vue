@@ -6,6 +6,9 @@
         <p>{{ cardSet.name }}</p>
         <span>{{ cardSet.cards.length }} cards</span>
       </div>
+      <div>
+        <span @click="editClick">Edit</span>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +21,12 @@
       backgroundColor() {
         const randomColorIndex = Math.floor(Math.random() * Math.floor(colors.length));
         return colors[randomColorIndex];
+      }
+    },
+
+    methods: {
+      editClick() {
+        this.$router.push({ name: "editor", params: { routeName: this.cardSet.id, collectionId: this.cardSet.id }});
       }
     },
     props: ["cardSet"],
